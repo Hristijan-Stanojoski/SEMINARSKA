@@ -1,0 +1,23 @@
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:PersonShape a sh:NodeShape ;
+  sh:targetClass ex:Person ;
+  sh:property [
+    sh:path ex:hasAge ;
+    sh:datatype xsd:integer ;
+    sh:minInclusive 0 ;
+    sh:maxInclusive 150 ;
+  ] ;
+  sh:property [
+    sh:path ex:hasHeight ;
+    sh:datatype xsd:decimal ;
+    sh:minInclusive 0 ;
+    sh:maxInclusive 3 ;
+  ] ;
+  sh:property [
+    sh:path ex:hasGender ;
+    sh:datatype xsd:string ;
+  ] .
+

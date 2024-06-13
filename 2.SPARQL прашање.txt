@@ -1,0 +1,14 @@
+PREFIX ex: <http://example.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?person ?name ?age ?city ?organization
+WHERE {
+  ?person rdf:type ex:Person .
+  ?person foaf:name ?name .
+  OPTIONAL { ?person ex:hasAge ?age }
+  OPTIONAL { ?person ex:hasCity ?city }
+  OPTIONAL { ?person ex:worksFor ?organization }
+  FILTER (?name = "Христијан Станојоски" || ?name = "Ана Иваноска")
+}
+LIMIT 10

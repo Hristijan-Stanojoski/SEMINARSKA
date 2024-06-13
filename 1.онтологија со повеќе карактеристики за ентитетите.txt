@@ -1,0 +1,66 @@
+@prefix ex: <http://example.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+# Дефинирање на класи
+ex:Person a rdfs:Class ;
+    rdfs:label "Person" .
+
+ex:Organization a rdfs:Class ;
+    rdfs:label "Organization" .
+
+# Дефинирање на својства
+ex:hasName a rdf:Property ;
+    rdfs:label "hasName" ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:string .
+
+ex:hasAge a rdf:Property ;
+    rdfs:label "hasAge" ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:integer .
+
+ex:hasGender a rdf:Property ;
+    rdfs:label "hasGender" ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:string .
+
+ex:hasHeight a rdf:Property ;
+    rdfs:label "hasHeight" ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:decimal .
+
+ex:worksFor a rdf:Property ;
+    rdfs:label "worksFor" ;
+    rdfs:domain ex:Person ;
+    rdfs:range ex:Organization .
+
+ex:locatedIn a rdf:Property ;
+    rdfs:label "locatedIn" ;
+    rdfs:domain ex:Organization ;
+    rdfs:range xsd:string .
+
+# Примери за инстанци на класите Person и Organization
+ex:Person1 a ex:Person ;
+    foaf:name "Христијан Станојоски" ;
+    ex:hasAge 30 ;
+    ex:hasGender "Male" ;
+    ex:hasHeight 180.5 ;
+    ex:worksFor ex:Organization1 .
+
+ex:Person2 a ex:Person ;
+    foaf:name "Ана Иваноска" ;
+    ex:hasAge 28 ;
+    ex:hasGender "Female" ;
+    ex:hasHeight 165.4 ;
+    ex:worksFor ex:Organization2 .
+
+ex:Organization1 a ex:Organization ;
+    foaf:name "TechCorp" ;
+    ex:locatedIn "Skopje" .
+
+ex:Organization2 a ex:Organization ;
+    foaf:name "InnovateLtd" ;
+    ex:locatedIn "Bitola" .

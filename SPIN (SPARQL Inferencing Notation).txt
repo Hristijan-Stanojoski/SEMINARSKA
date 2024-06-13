@@ -1,0 +1,57 @@
+@prefix ex: <http://example.org/> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# Дефинирање на класи
+ex:Person a rdfs:Class ;
+    rdfs:label "Person" .
+
+# Дефинирање на својства
+ex:hasAge a rdf:Property ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:integer ;
+    rdfs:label "has age" .
+
+# Дефинирање на SPIN функција
+ex:ageGreaterThan
+  a spin:Function ;
+  rdfs:label "ageGreaterThan" ;
+  spin:constraint [
+    a sp:Constraint ;
+    sp:predicate ex:hasAge ;
+    sp:text """
+      SELECT ?person
+      WHERE {
+        ?person ex:hasAge ?age .
+        FILTER (?age > ?threshold)
+      }
+    """
+  ] .
+
+# Дефинирање на инстанци
+ex:Person1 a ex:Person ;
+    foaf:name "Христијан Станојоски" ;
+    ex:hasAge 30 .
+
+ex:Person2 a ex:Person ;
+    foaf:name "Ана Иваноска" ;
+    ex:hasAge 28 .
+
+# SPARQL прашање
+"""
+PREFIX ex: <http://example.org/>
+PREFIX spin: <http://spinrdf.org/spin#>
+PREFIX sp: <http://spinrdf.org/sp#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?person ?name
+WHERE {
+  ?person rdf:type ex:Person .
+  ?person foaf:name ?name .
+  ?person ex:hasAge ?age .
+  FILTER ex:ageGreaterThan(?person, 25)
+}
+"""

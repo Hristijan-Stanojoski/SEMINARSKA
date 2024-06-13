@@ -1,0 +1,14 @@
+PREFIX ex: <http://example.org/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?person ?name ?age ?externalData
+WHERE {
+  ?person rdf:type ex:Person .
+  ?person foaf:name ?name .
+  ?person ex:hasAge ?age .
+
+  SERVICE <http://example-external-source.org/sparql> {
+    ?person foaf:name ?name .
+    ?person ex:externalProperty ?externalData .
+  }
+}

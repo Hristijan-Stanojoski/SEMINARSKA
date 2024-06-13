@@ -1,0 +1,37 @@
+@prefix ex: <http://example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# Дефинирање на класата Person
+ex:Person a rdfs:Class ;
+    rdfs:label "Person" .
+
+# Дефинирање на својствата
+ex:hasAge a rdf:Property ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:integer ;
+    rdfs:label "has age" .
+
+ex:hasHeight a rdf:Property ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "has height" .
+
+ex:hasGender a rdf:Property ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:string ;
+    rdfs:label "has gender" .
+
+# Дефинирање на инстанци
+ex:Person1 a ex:Person ;
+    foaf:name "Христијан Станојоски" ;
+    ex:hasAge 30 ;
+    ex:hasHeight 1.80 ;
+    ex:hasGender "Male" .
+
+ex:Person2 a ex:Person ;
+    foaf:name "Ана Иваноска" ;
+    ex:hasAge 28 ;
+    ex:hasHeight 1.65 ;
+    ex:hasGender "Female" .
+
